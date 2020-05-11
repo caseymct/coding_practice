@@ -14,30 +14,21 @@ end
 #puts max_profit([2000])
 #puts max_profit([2000, 1999, 1800])
 
-def sum(a)
-  return a.length == 0 ? 0 : a.inject(:+)
-end
-
 def max_slice_sum(a)
-  n = a.length
-  len = n - 1
-  initial_slices = []
-  (1..len).each do |i|
-    prev = i == 1 ? a[0] : initial_slices[i-2]
-    initial_slices.push(prev + a[i])
-  end
-  
-  max_sum = initial_slices.max
-  return max_sum if n == 2
+  n = a.length - 1
+  result = nil
 
-  (2..(n - 1)).each do |i|
-    initial_slices.shift
-    initial_slices = initial_slices.map{|j| j - a[i-2]}
-    max_sum = [max_sum, initial_slices.max].max
+  (0..n).each do |p|
+    sum = 0
+
+    (p..n).each do |q|
+      sum += a[q]
+      result = result.nil? ? sum : [result, sum].max
+    end
   end
-  
-  return max_sum
+  result
 end
 
 puts max_slice_sum([3, 2, -6, 4, 0])
 puts max_slice_sum([3, 2, -6, 4, 10])
+puts max_slice_sum([-10])
