@@ -45,3 +45,20 @@ puts missing_integer([-3, -1])
 puts missing_integer([1, 2, 3])
 puts missing_integer([2])
 puts missing_integer([-2, 200])
+
+def perm_check(a)
+  a.sort!
+  return 0 if a[0] > 1
+
+  (0..(a.length - 2)).each do |i|
+    return 0 if a[i+1] - a[i] != 1
+  end
+  return 1
+end
+
+#puts perm_check([3, 2, 4])
+#puts perm_check([1, 3, 2, 4])
+#puts perm_check([1, 2, 4])
+#puts perm_check([4, 5, 10, 2, 7])
+#puts perm_check([1, 2, 3, 5, 4])
+#puts perm_check([1,1])
